@@ -1,0 +1,19 @@
+<h1>WebClientBeers#index</h1>
+<p>Find me in app/views/web_client_beers/index.html.erb</p>
+
+<div id="app">
+  <div>
+  Name:<input v-model="newName">
+  Hop:<input v-model="newHop">
+  IBU:<input v-model="newIbu">
+  <button v-on:click="createBeer()">Add Beer to DB</button>
+  </div>
+  <div v-for="beer in beers">
+    <p>{{ beer.name }}</p>
+    <p>{{ beer.hop }}</p>
+    <p>{{ beer.ibu }}</p>
+    <p>{{ beer.id }}</p>
+    <button v-on:click="deleteBeer()">Delete Beer</button>
+    <hr>
+  </div>
+</div>
