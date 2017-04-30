@@ -3,17 +3,25 @@
 
 <div id="app">
   <div>
-  Beer Filter:<input v-model="beerFilter">
+  Beer Filter:<input v-model="beerFilter" list="beers">
+  <datalist id="beers">
+    <option v-for="beer in beers">{{ beer.name }}</option>
+  </datalist>
+  <hr>
   Name:<input v-model="newName">
   Hop:<input v-model="newHop">
   IBU:<input v-model="newIbu">
   <button v-on:click="createBeer()">Add Beer to DB</button>
+  <hr>
+  <button v-on:click="changeSortAttribute('name')">Sort by Name</button>
+  <button v-on:click="changeSortAttribute('hop')">Sort by Hop</button>
+  <button v-on:click="changeSortAttribute('ibu')">Sort by Ibu</button>
   </div>
   <div v-for="beer in modifiedBeers" v-if="showBeers(beer)">
-    <p>{{ beer.name }}</p>
-    <p>{{ beer.hop }}</p>
-    <p>{{ beer.ibu }}</p>
-    <p>{{ beer.id }}</p>
+    <p>Name: {{ beer.name }}</p>
+    <p>Hop: {{ beer.hop }}</p>
+    <p>IBU: {{ beer.ibu }}</p>
+    <p>Id: {{ beer.id }}</p>
     <button v-on:click="deleteBeer()">Delete Beer</button>
     <hr>
   </div>

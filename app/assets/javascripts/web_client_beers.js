@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
       newName: '',
       newHop: '',
       newIbu: '',
-      beerFilter: ''
+      beerFilter: '',
+      setAttribute: ''
     },
     methods: {
       createBeer: function() {
@@ -31,14 +32,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
         this.newIbu = '';
       },
 
-      // deleteBeer: function() {
-      //   console.log("delete beer method called");
-      // },
+      deleteBeer: function() {
+        console.log("delete beer method called");
+      },
 
       showBeers: function(inputBeer) {
         console.log(inputBeer.name);
         console.log(inputBeer.id);
         return inputBeer.name.indexOf(this.beerFilter) > -1;
+      },
+
+      changeSortAttribute: function(inputAttribute) {
+        this.setAttribute = inputAttribute;
+        console.log("changeSort")
       }
     },
     mounted: function() {
@@ -50,8 +56,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     computed: {
       modifiedBeers: function() {
         return this.beers.sort(function(beer1, beer2) {
-          return beer1.name.toLowerCase().localeCompare(beer2.name.toLowerCase());
-        });
+          if (this.setAttribute === 'name') {
+            return beer1[this.setAttribute].toLowerCase().localeCompare(beer2[this.setAttribute].toLowerCase());
+          } else {
+            return beer1[this.setAttribute] < (beer2[this.setAttribute]);
+          }
+        }.bind(this));
       }
     }
   });
