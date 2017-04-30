@@ -3,12 +3,13 @@
 
 <div id="app">
   <div>
+  Beer Filter:<input v-model="beerFilter">
   Name:<input v-model="newName">
   Hop:<input v-model="newHop">
   IBU:<input v-model="newIbu">
   <button v-on:click="createBeer()">Add Beer to DB</button>
   </div>
-  <div v-for="beer in beers">
+  <div v-for="beer in modifiedBeers" v-if="showBeers(beer)">
     <p>{{ beer.name }}</p>
     <p>{{ beer.hop }}</p>
     <p>{{ beer.ibu }}</p>
